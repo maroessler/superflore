@@ -101,7 +101,7 @@ def regenerate_pkg(
     success_msg = 'Successfully generated recipe for package'
     ok('{0} \'{1}\'.'.format(success_msg, pkg))
     recipe_file_name = '{0}/meta-ros{1}-{2}/generated-recipes/{3}/' \
-        '{4}_{5}.bb'.format(
+        'ros{1}-{4}_{5}.bb'.format(
             repo_dir,
             yoctoRecipe._get_ros_version(distro.name),
             distro.name,
@@ -114,7 +114,7 @@ def regenerate_pkg(
             ok('Writing recipe {0}'.format(recipe_file_name))
             recipe_file.write(recipe_text)
             yoctoRecipe.generated_components.add(component_name)
-            yoctoRecipe.generated_recipes[recipe] = (version, component_name)
+            yoctoRecipe.generated_recipes['ros{0}-{1}'.format(yoctoRecipe._get_ros_version(distro.name), recipe)] = (version, component_name)
     except Exception:
         err("Failed to write recipe to disk!")
         yoctoRecipe.not_generated_recipes.add(pkg)

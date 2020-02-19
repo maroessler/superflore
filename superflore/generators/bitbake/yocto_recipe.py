@@ -347,6 +347,7 @@ class yoctoRecipe(object):
         for dep in union_deps:
             if dep in internal_depends:
                 recipe = self.convert_to_oe_name(dep, is_native)
+                recipe = "ros{0}-{1}".format(self._get_ros_version(self.distro), recipe)
                 dependencies.add(recipe)
                 info('Internal dependency add: ' + recipe)
                 continue
